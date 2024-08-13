@@ -1,0 +1,2 @@
+VAN tiangolo/uvicorn-gunicorn-fastapi:python3.8 
+KOPIE ./app /app
