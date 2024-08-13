@@ -1,2 +1,4 @@
-frozendict>=2.3.0
-experta>=1.0.0  # Ensure this version is compatible
+frozendict
+experta
+fastapi
+uvicorn
