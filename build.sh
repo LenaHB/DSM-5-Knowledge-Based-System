@@ -4,7 +4,7 @@ set -o errexit
 
 # Modify this line as needed for your package manager (pip, poetry, etc.)
 pip install -r requirements.txt
-pip install --upgrade frozendict experta
+pip install experta
 pip freeze > requirements.txt
 # Remove existing virtual environment
 rm -rf .venv
@@ -16,4 +16,5 @@ python -m venv .venv
 source .venv/bin/activate  # or .venv\Scripts\activate for Windows
 
 # Install dependencies
-pip install -r requirements.txt
+pip install fastapi uvicorn
+python -m pip install --upgrade pip
