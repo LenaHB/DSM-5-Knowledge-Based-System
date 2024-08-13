@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expert System Interface</title>
+</head>
+<body>
+    <h1>Welcome to the Expert System</h1>
+    <form id="expert-system-form">
+        <div id="question-container">
+            <button type="button" onclick="startSystem()">Start</button>
+        </div>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        function startSystem() {
+            fetch('/start', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.question) {
+                    displayQuestion(data.question);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function displayQuestion(question) {
+            const container = document.getElementById('question-container');
+            container.innerHTML = `
+                <p>${question.text}</p>
+                ${question.valid.map(option => `<button type="button" onclick="submitAnswer('${option}')">${option}</button>`).join(' ')}
+            `;
+        }
+
+        function submitAnswer(answer) {
+            fetch('/answer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ answer: answer })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.question) {
+                    displayQuestion(data.question);
+                } else if (data.subsystem_question) {
+                    displayQuestion(data.subsystem_question);
+                } else if (data.result) {
+                    document.getElementById('result').innerText = data.result;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

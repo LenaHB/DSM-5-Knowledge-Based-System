@@ -1,0 +1,7 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+  - name: DSM-5-Knowledge-Based-System
+    src: ./
+    engine: python3.9
+    primary: true
