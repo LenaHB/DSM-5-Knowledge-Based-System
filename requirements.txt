@@ -2,3 +2,4 @@ frozendict
 experta
 fastapi
 uvicorn
+fastapi[all]

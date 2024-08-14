@@ -5,5 +5,7 @@ services:
     runtime: python
     plan: free
     autoDeploy: false
+    web: ./build.sh
+    # runtime: python-3.9
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main1:app --host 0.0.0.0 --port $PORT
